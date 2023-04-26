@@ -38,7 +38,7 @@ END COMPONENT;
 
 
 FILE in_file : TEXT open read_mode is 	"fp_adder_Input.txt";   -- Inputs, reset, enr,enl
-FILE exo_file : TEXT open read_mode is 	"fp_adder_EXP_Output.txt";   -- Expected output (binary)
+FILE exo_file : TEXT open read_mode is 	"fp_adder_Output.txt";   -- Expected output (binary)
 FILE out_file : TEXT open  write_mode is  "fp_adder_dataout_dacus.txt";
 FILE xout_file : TEXT open  write_mode is "fp_adder_TestOut_dacus.txt";
 FILE hex_out_file : TEXT open  write_mode is "fp_adder_hex_out_dacus.txt";
@@ -165,7 +165,7 @@ while (not simcomplete) LOOP
 	   start <= vstart;
 	 
 	  read(exo_line, vEXP_sum );
-		sum      <= vEXP_sum;
+		exp_sum      <= vEXP_sum;
 		
 		
     vlinenumber :=LineNumber;
@@ -181,7 +181,7 @@ while (not simcomplete) LOOP
     Exp_sum      <= vexp_sum;
     
       
-    if (Exp_sum = sum) then
+    if (exp_sum = sum) then
       Test_Out_Q <= '0';
     else
       Test_Out_Q <= 'X';
