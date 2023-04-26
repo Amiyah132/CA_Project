@@ -34,12 +34,12 @@ begin
     variable diff : signed(8 downto 0);
   begin
     if(reset = '1') then
-      state <= COMPARE;                 --start in wait state
+      state <= COMPARE;                
       done    <= '0';
     elsif rising_edge(clk) then
       case state is
         when COMPARE =>
-          if (start = '1') then            --wait till start request startes high
+          if (start = '1') then        
             A_sgn      <= A(31);
             A_exp      <= '0' & A(30 downto 23);	--One bit is added for signed subtraction
             A_mantissa <= "01" & A(22 downto 0);	--Two bits are added extra, one for leading 1 and other one for storing carry
@@ -122,7 +122,7 @@ begin
          sum(30 downto 23) <= sum_exp(7 downto 0);
          sum(31) <= sum_sgn;
           done              <= '1';     -- signal done
-          if (start = '0') then         -- stay in the state till request ends i.e start is low
+          if (start = '1') then         -- stay in the state till request ends i.e start is low
             done    <= '0';
             state <= COMPARE;
           end if;
@@ -132,19 +132,5 @@ begin
     end if;
   end process;
 
-
-end structural;
-          sum(30 downto 23) <= sum_exp(7 downto 0);
-          sum(31) <= sum_sgn;
-          done              <= '1';     -- signal done
-          if (start = '0') then         -- stay in the state till request ends i.e start is low
-            done    <= '0';
-            state <= COMPARE;
-          end if;
-        when others => 
-			state <= COMPARE;      --Just in case.
-      end case;
-    end if;
-  end process;
 
 end structural;
